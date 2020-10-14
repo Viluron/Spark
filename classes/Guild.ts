@@ -1,7 +1,7 @@
 import type Client from '../client/Client.ts';
 import type { ChannelPayload, GuildCreatePayload } from '../interfaces/Payloads.ts';
 import Base from './Base.ts';
-import Collection from './Collection.ts';
+import Collection from '../util/Collection.ts';
 import ChannelFactory from '../util/ChannelFactory.ts';
 import type Channel from './Channel.ts';
 

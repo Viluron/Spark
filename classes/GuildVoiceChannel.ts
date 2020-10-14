@@ -1,6 +1,6 @@
 import type Client from '../client/Client.ts';
 import type { ChannelPayload, PermissionOverwritesPayload } from '../interfaces/Payloads.ts';
-import Collection from './Collection.ts';
+import Collection from '../util/Collection.ts';
 import type Guild from './Guild.ts';
 import GuildChannel from './GuildChannel.ts';
 import PermissionOverwrite from './PermissionOverwrite.ts';

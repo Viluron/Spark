@@ -1,5 +1,5 @@
 import EventEmitter from 'https://deno.land/std@0.74.0/node/events.ts';
-import Collection from '../classes/Collection.ts';
+import Collection from '../util/Collection.ts';
 import type Guild from '../classes/Guild.ts';
 import type User from '../classes/User.ts';
 import WebSocketManager from './ws/WebSocketManager.ts';
