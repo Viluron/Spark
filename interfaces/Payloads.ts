@@ -1,4 +1,6 @@
 import type Channel from '../classes/Channel.ts';
+import type User from '../classes/User.ts';
+import type { CHANNELTYPES, PERMISSION_OVERWRITE_TYPE } from '../constants/discord.ts';
 
 export interface GatewayPayload {
 	op: number;
@@ -7,7 +9,7 @@ export interface GatewayPayload {
 	t: string;
 }
 
-export interface GuildCreate {
+export interface GuildCreatePayload {
 	id: string;
 	name: string;
 	icon: string;
@@ -38,7 +40,7 @@ export interface GuildCreate {
 	member_count?: number;
 	voice_states?: object[];
 	members?: object[];
-	channels?: Channel[];
+	channels?: ChannelPayload[];
 	presences?: object[];
 	max_presences?: number;
 	max_members?: number;
@@ -52,4 +54,48 @@ export interface GuildCreate {
 	max_video_channel_users?: number;
 	approximate_member_count?: number;
 	approximate_presence_count?: number;
+}
+
+export interface ChannelPayload {
+	id: string;
+	type: CHANNELTYPES;
+	guild_id?: string;
+	position?: number;
+	permission_overwrites?: PermissionOverwritesPayload[];
+	name?: string;
+	topic?: string;
+	nsfw?: boolean;
+	last_message_id?: string;
+	bitrate?: number;
+	user_limit?: number;
+	rate_limit_per_user?: number;
+	recipients?: User[];
+	icon?: string;
+	owner_id?: string;
+	application_id?: string;
+	parent_id?: string;
+	last_pin_timestamp: string;
+}
+
+export interface PermissionOverwritesPayload {
+	id: string;
+	type: PERMISSION_OVERWRITE_TYPE;
+	allow: string;
+	deny: string;
+}
+
+export interface UserPaylaod {
+	id: string;
+	username: string;
+	discriminator: string;
+	avatar: string;
+	bot: boolean;
+	system: boolean;
+	mfaEnabled: boolean;
+	locale: string;
+	verified: boolean;
+	email: string;
+	flags: number;
+	premiumType: number;
+	publicFlags: number;
 }

@@ -1,4 +1,5 @@
 import type Client from '../client/Client.ts';
+import type { UserPaylaod } from '../interfaces/Payloads.ts';
 import Base from './Base.ts';
 
 export default class User extends Base {
@@ -17,38 +18,23 @@ export default class User extends Base {
 	private _premiumType?: number;
 	private _publicFlags?: number;
 
-	constructor(
-		client: Client,
-		id: string,
-		username: string,
-		discriminator: string,
-		avatar: string,
-		bot: boolean,
-		system: boolean,
-		mfaEnabled: boolean,
-		locale: string,
-		verified: boolean,
-		email: string,
-		flags: number,
-		premiumType: number,
-		publicFlags: number
-	) {
+	constructor(client: Client, p: UserPaylaod) {
 		super(client);
 
 		this._client = client;
-		this._id = id;
-		this._username = username;
-		this._avatar = avatar;
-		this._discriminator = discriminator;
-		this._bot = bot;
-		this._system = system;
-		this._mfaEnabled = mfaEnabled;
-		this._locale = locale;
-		this._verified = verified;
-		this._email = email;
-		this._flags = flags;
-		this._premiumType = premiumType;
-		this._publicFlags = publicFlags;
+		this._id = p.id;
+		this._username = p.username;
+		this._avatar = p.avatar;
+		this._discriminator = p.discriminator;
+		this._bot = p.bot;
+		this._system = p.system;
+		this._mfaEnabled = p.mfaEnabled;
+		this._locale = p.locale;
+		this._verified = p.verified;
+		this._email = p.email;
+		this._flags = p.flags;
+		this._premiumType = p.premiumType;
+		this._publicFlags = p.publicFlags;
 	}
 
 	get id() {

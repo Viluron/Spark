@@ -1,8 +1,9 @@
 import type Client from '../client/Client.ts';
-import type { GuildCreate } from '../interfaces/Payloads.ts';
+import type { ChannelPayload, GuildCreatePayload } from '../interfaces/Payloads.ts';
 import Base from './Base.ts';
-import Channel from './Channel.ts';
 import Collection from './Collection.ts';
+import ChannelFactory from '../util/ChannelFactory.ts';
+import type Channel from './Channel.ts';
 
 export default class Guild extends Base {
 	private _id: string;
@@ -50,7 +51,7 @@ export default class Guild extends Base {
 	private _approximateMemberCount?: number;
 	private _approximatePresenceCount?: number;
 
-	constructor(client: Client, p: GuildCreate) {
+	constructor(client: Client, p: GuildCreatePayload) {
 		super(client);
 
 		this._id = p.id;
@@ -83,7 +84,7 @@ export default class Guild extends Base {
 		this._memberCount = p.member_count;
 		this._voiceStates = p.voice_states; // TODO: Voice States Class
 		this._members = p.members; // TODO: Guild Member Class
-		// this._channels = this.createChannels(p.channels); TODO: Create Channels
+		this._channels = this.generateChannelCollection(p.channels);
 		this._presences = p.presences; // TODO: Presences Class
 		this._maxPresences = p.max_presences;
 		this._maxMembers = p.max_members;
@@ -307,11 +308,18 @@ export default class Guild extends Base {
 		return this._publicUpdatesChannelId;
 	}
 
-	private generateChannelCollection(payload: any) {
-		const channels: any = [];
+	private generateChannelCollection(payload: ChannelPayload[] | undefined): Collection<string, Channel> {
+		const channels: Collection<string, Channel> = new Collection([]);
 
-		payload.forEach((channel: any) => channels.push([channel.id, new Channel(this.client, channel.id)]));
+		if (!payload) return channels;
 
-		return new Collection(channels);
+		payload.forEach((channel: ChannelPayload) => {
+			const channelObj = ChannelFactory.createChannel(this.client, this, channel);
+
+			if (!channelObj) return;
+			channels.set(channel.id, channelObj);
+		});
+
+		return channels;
 	}
 }

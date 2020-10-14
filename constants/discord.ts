@@ -26,3 +26,8 @@ export enum CHANNELTYPES {
 	GUILD_NEWS = 5,
 	GUILD_STORE = 6
 }
+
+export enum PERMISSION_OVERWRITE_TYPE {
+	ROLE = 0,
+	MEMBER = 1
+}

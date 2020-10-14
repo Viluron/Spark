@@ -73,5 +73,7 @@ export default class Collection<K, V> extends Map<K, V> {
 			const value = this.get(key)!;
 			accumulator = callback(accumulator, value, key);
 		}
+
+		return accumulator;
 	}
 }
