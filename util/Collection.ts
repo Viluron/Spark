@@ -30,6 +30,10 @@ export default class Collection<K, V> extends Map<K, V> {
 		return;
 	}
 
+	findById(id: K): V | null {
+		return this.get(id) || null;
+	}
+
 	filter(callback: (value: V, key: K) => boolean) {
 		const relevant = new Collection<K, V>();
 		this.forEach((value, key) => {

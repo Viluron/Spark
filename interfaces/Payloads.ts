@@ -56,6 +56,33 @@ export interface GuildCreatePayload {
 	approximate_presence_count?: number;
 }
 
+export interface MessageCreatePayload {
+	id: string;
+	channel_id: string;
+	guild_id?: string;
+	author: UserPaylaod;
+	member?: object; // TODO:
+	content: string;
+	timestamp: string;
+	edited_timestamp: string | null;
+	tts: boolean;
+	mention_everyone: boolean;
+	mentions: UserPaylaod[];
+	mention_roles: string[];
+	mention_channels: ChannelPayload[];
+	attachments: object[]; // TODO:
+	embeds: object[]; // TODO:
+	reactions?: object[]; // TODO:
+	nonce?: string | number;
+	pinned: boolean;
+	webhook_id?: string;
+	type: number;
+	activity?: object; // TODO:
+	application?: object; // TODO:
+	message_reference?: object; // TODO:
+	flags?: number;
+}
+
 export interface ChannelPayload {
 	id: string;
 	type: CHANNELTYPES;
