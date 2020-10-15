@@ -1,10 +1,10 @@
-import { OPCODES } from './discord.ts';
+import { CONSTANTS, INTENDS, OPCODES } from './discord.ts';
 
 export const Identify = {
 	op: OPCODES.IDENTIFY,
 	d: {
 		token: '',
-		intents: 513,
+		intents: 0,
 		properties: {
 			$os: 'linux',
 			$browser: 'Spark',

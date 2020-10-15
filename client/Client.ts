@@ -3,6 +3,7 @@ import Collection from '../util/Collection.ts';
 import type Guild from '../classes/Guild.ts';
 import type User from '../classes/User.ts';
 import WebSocketManager from './ws/WebSocketManager.ts';
+import { INTENDS } from '../constants/discord.ts';
 
 export default class Client extends EventEmitter {
 	private _socket: WebSocketManager = new WebSocketManager(this);
@@ -30,8 +31,17 @@ export default class Client extends EventEmitter {
 		return this._guilds;
 	}
 
-	login(token: string) {
+	login(token: string, intends?: INTENDS[] | INTENDS) {
 		this._token = token;
-		this._socket.connect(token);
+
+		if (Array.isArray(intends)) {
+			let sum = 0;
+
+			intends.forEach((intend: number) => (sum += intend));
+
+			intends = sum;
+		}
+
+		this._socket.connect(token, intends);
 	}
 }
