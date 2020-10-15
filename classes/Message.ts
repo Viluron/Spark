@@ -1,5 +1,8 @@
 import Client from '../client/Client.ts';
+import RequestManager from '../client/http/RequestManager.ts';
+import { CLOSECODES } from '../constants/discord.ts';
 import { ChannelPayload, MessageCreatePayload } from '../interfaces/Payloads.ts';
+import ChannelFactory from '../util/ChannelFactory.ts';
 import Base from './Base.ts';
 import Channel from './Channel.ts';
 import Guild from './Guild.ts';
@@ -9,7 +12,7 @@ import User from './User.ts';
 export default class Message extends Base {
 	private _id: string;
 	private _channelId: string;
-	private _channel: Channel; // TODO: Set Channel Object in constructor
+	private _channel!: Channel;
 	private _guildId?: string;
 	private _guild?: Guild;
 	private _author: User;
@@ -33,7 +36,7 @@ export default class Message extends Base {
 	// TODO: private _messageReference?: MessageReference;
 	private _flags?: number;
 
-	constructor(client: Client, p: MessageCreatePayload) {
+	constructor(client: Client, p: MessageCreatePayload, channel: Channel) {
 		super(client);
 
 		this._id = p.id;
@@ -50,19 +53,27 @@ export default class Message extends Base {
 		this._type = p.type;
 		this._flags = p.flags;
 		this._mentionChannels = [];
+		this._channel = channel;
 
 		if (this._guildId) {
 			const guild = this.client.guilds.findById(this._guildId);
 
 			if (guild) {
 				this._guild = guild;
+
 				const mentionedChannels: GuildTextChannel[] = [];
 
-				p.mention_channels.forEach((channel: ChannelPayload) =>
-					mentionedChannels.push(new GuildTextChannel(client, guild, channel))
-				);
-				this._mentionChannels = mentionedChannels;
+				if (p.mention_channels) {
+					p.mention_channels.forEach((channel: ChannelPayload) =>
+						mentionedChannels.push(new GuildTextChannel(client, guild, channel))
+					);
+					this._mentionChannels = mentionedChannels;
+				}
 			}
 		}
+	}
+
+	get channel() {
+		return this._channel;
 	}
 }

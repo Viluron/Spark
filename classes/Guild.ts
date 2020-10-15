@@ -308,13 +308,17 @@ export default class Guild extends Base {
 		return this._publicUpdatesChannelId;
 	}
 
+	public get channels(): Collection<string, Channel> {
+		return this._channels!;
+	}
+
 	private generateChannelCollection(payload: ChannelPayload[] | undefined): Collection<string, Channel> {
 		const channels: Collection<string, Channel> = new Collection([]);
 
 		if (!payload) return channels;
 
 		payload.forEach((channel: ChannelPayload) => {
-			const channelObj = ChannelFactory.createChannel(this.client, this, channel);
+			const channelObj = ChannelFactory.createChannel(this.client, channel, this);
 
 			if (!channelObj) return;
 			channels.set(channel.id, channelObj);
