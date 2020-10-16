@@ -1,10 +1,6 @@
-import Client from './client/Client.ts';
-import { INTENDS, CHANNELTYPES } from './constants/discord.ts';
+export { default as Client } from './client/Client.ts';
+export * from './util/CommandParser.ts';
+export * as Message from './classes/Message.ts';
+export { INTENDS, CHANNELTYPES } from './constants/discord.ts';
 
-const Spark = {
-	Client,
-	INTENDS,
-	CHANNELTYPES
-};
-
-export default Spark;
+export type { EventHandler } from './client/Client.ts';

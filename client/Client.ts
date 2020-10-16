@@ -1,9 +1,14 @@
-import EventEmitter from 'https://deno.land/std@0.74.0/node/events.ts';
+import EventEmitter, { GenericFunction } from 'https://deno.land/std@0.74.0/node/events.ts';
 import Collection from '../util/Collection.ts';
 import type Guild from '../classes/Guild.ts';
 import type User from '../classes/User.ts';
 import WebSocketManager from './ws/WebSocketManager.ts';
 import { INTENDS } from '../constants/discord.ts';
+
+export interface EventHandler {
+	event: string;
+	handler: GenericFunction;
+}
 
 export default class Client extends EventEmitter {
 	private _socket: WebSocketManager = new WebSocketManager(this);
@@ -29,6 +34,10 @@ export default class Client extends EventEmitter {
 
 	get guilds() {
 		return this._guilds;
+	}
+
+	use(handler: EventHandler) {
+		this.on(handler.event, handler.handler);
 	}
 
 	login(token: string, intends?: INTENDS[] | INTENDS) {

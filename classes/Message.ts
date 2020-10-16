@@ -2,7 +2,6 @@ import Client from '../client/Client.ts';
 import RequestManager from '../client/http/RequestManager.ts';
 import { CHANNELTYPES, CLOSECODES } from '../constants/discord.ts';
 import { ChannelPayload, MessageCreatePayload } from '../interfaces/Payloads.ts';
-import ChannelFactory from '../util/ChannelFactory.ts';
 import Base from './Base.ts';
 import Channel from './Channel.ts';
 import DMChannel from './DMChannel.ts';
