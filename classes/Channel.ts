@@ -1,9 +1,9 @@
-import type Client from '../client/Client.ts';
-import Base from './Base.ts';
+import type { Client } from '../client/Client.ts';
+import { Base } from './Base.ts';
 import type { ChannelPayload } from '../interfaces/Payloads.ts';
 import type { CHANNELTYPES } from '../constants/discord.ts';
 
-export default class Channel extends Base {
+export class Channel extends Base {
 	private _id: string;
 	private _type: CHANNELTYPES;
 

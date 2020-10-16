@@ -1,10 +1,10 @@
 import { CONSTANTS } from '../../constants/discord.ts';
 import { MessageCreatePayload, SendMessagePayload } from '../../interfaces/Payloads.ts';
-import Message from '../../classes/Message.ts';
-import type Client from '../Client.ts';
-import type Channel from '../../classes/Channel.ts';
+import { Message } from '../../classes/Message.ts';
+import type { Client } from '../Client.ts';
+import type { Channel } from '../../classes/Channel.ts';
 
-export default class RequestManager {
+export class RequestManager {
 	private _client: Client;
 	private _headers = {};
 

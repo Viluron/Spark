@@ -1,15 +1,15 @@
-import Client from '../client/Client.ts';
-import RequestManager from '../client/http/RequestManager.ts';
+import { Client } from '../client/Client.ts';
+import { RequestManager } from '../client/http/RequestManager.ts';
 import { CHANNELTYPES, CLOSECODES } from '../constants/discord.ts';
 import { ChannelPayload, MessageCreatePayload } from '../interfaces/Payloads.ts';
-import Base from './Base.ts';
-import Channel from './Channel.ts';
-import DMChannel from './DMChannel.ts';
-import Guild from './Guild.ts';
-import GuildTextChannel from './GuildTextChannel.ts';
-import User from './User.ts';
+import { Base } from './Base.ts';
+import { Channel } from './Channel.ts';
+import { DMChannel } from './DMChannel.ts';
+import { Guild } from './Guild.ts';
+import { GuildTextChannel } from './GuildTextChannel.ts';
+import { User } from './User.ts';
 
-export default class Message extends Base {
+export class Message extends Base {
 	private _id: string;
 	private _channelId: string;
 	private _channel!: DMChannel | GuildTextChannel;

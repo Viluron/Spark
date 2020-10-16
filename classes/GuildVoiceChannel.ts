@@ -1,11 +1,11 @@
-import type Client from '../client/Client.ts';
+import type { Client } from '../client/Client.ts';
 import type { ChannelPayload, PermissionOverwritesPayload } from '../interfaces/Payloads.ts';
-import Collection from '../util/Collection.ts';
-import type Guild from './Guild.ts';
-import GuildChannel from './GuildChannel.ts';
-import PermissionOverwrite from './PermissionOverwrite.ts';
+import { Collection } from '../util/Collection.ts';
+import type { Guild } from './Guild.ts';
+import { GuildChannel } from './GuildChannel.ts';
+import { PermissionOverwrite } from './PermissionOverwrite.ts';
 
-export default class GuildVoiceChannel extends GuildChannel {
+export class GuildVoiceChannel extends GuildChannel {
 	private _bitrate: number;
 	private _userLimit: number;
 	private _rateLimitPerUser: number;

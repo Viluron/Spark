@@ -1,11 +1,11 @@
-import Channel from '../classes/Channel.ts';
-import Message from '../classes/Message.ts';
-import Client from '../client/Client.ts';
-import RequestManager from '../client/http/RequestManager.ts';
+import { Channel } from '../classes/Channel.ts';
+import { Message } from '../classes/Message.ts';
+import { Client } from '../client/Client.ts';
+import { RequestManager } from '../client/http/RequestManager.ts';
 import { ChannelPayload, MessageCreatePayload } from '../interfaces/Payloads.ts';
-import ChannelFactory from '../util/ChannelFactory.ts';
+import { ChannelFactory } from '../util/ChannelFactory.ts';
 
-export default async function (client: Client, payload: MessageCreatePayload) {
+export async function handler(client: Client, payload: MessageCreatePayload) {
 	let channel: Channel | null = null;
 	const channelId = payload.channel_id;
 

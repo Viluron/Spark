@@ -1,9 +1,9 @@
-import Client from '../client/Client.ts';
+import { Client } from '../client/Client.ts';
 import { ChannelPayload, SendMessagePayload } from '../interfaces/Payloads.ts';
-import type Guild from './Guild.ts';
-import GuildChannel from './GuildChannel.ts';
+import type { Guild } from './Guild.ts';
+import { GuildChannel } from './GuildChannel.ts';
 
-export default class GuildTextChannel extends GuildChannel {
+export class GuildTextChannel extends GuildChannel {
 	private _topic?: string;
 	private _nsfw?: boolean;
 	private _lastMessageId?: string;

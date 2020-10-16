@@ -1,8 +1,8 @@
-import type Client from '../client/Client.ts';
+import type { Client } from '../client/Client.ts';
 import type { PermissionOverwritesPayload } from '../interfaces/Payloads.ts';
-import Base from './Base.ts';
+import { Base } from './Base.ts';
 
-export default class PermissionOverwrite extends Base {
+export class PermissionOverwrite extends Base {
 	private _id: string;
 	private _type: number;
 	private _allow: string;

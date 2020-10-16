@@ -1,5 +1,5 @@
-import Message from '../classes/Message.ts';
-import User from '../classes/User.ts';
+import { Message } from '../classes/Message.ts';
+import { User } from '../classes/User.ts';
 import { EventHandler } from '../client/Client.ts';
 
 export interface CommandInvoke {

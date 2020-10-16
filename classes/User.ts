@@ -1,8 +1,8 @@
-import type Client from '../client/Client.ts';
+import type { Client } from '../client/Client.ts';
 import type { UserPaylaod } from '../interfaces/Payloads.ts';
-import Base from './Base.ts';
+import { Base } from './Base.ts';
 
-export default class User extends Base {
+export class User extends Base {
 	protected _client: Client;
 	private _id?: string;
 	private _username?: string;

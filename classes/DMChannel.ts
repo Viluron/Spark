@@ -1,10 +1,10 @@
-import Client from '../client/Client.ts';
+import { Client } from '../client/Client.ts';
 import { ChannelPayload, SendMessagePayload } from '../interfaces/Payloads.ts';
-import Channel from './Channel.ts';
-import Message from './Message.ts';
-import User from './User.ts';
+import { Channel } from './Channel.ts';
+import { Message } from './Message.ts';
+import { User } from './User.ts';
 
-export default class DMChannel extends Channel {
+export class DMChannel extends Channel {
 	private _lastMessageId?: string;
 	private _lastPinTimestamp?: string;
 	private _recipient: User;

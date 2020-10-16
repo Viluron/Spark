@@ -1,7 +1,7 @@
-import type Client from '../client/Client.ts';
-import RequestManager from '../client/http/RequestManager.ts';
+import type { Client } from '../client/Client.ts';
+import { RequestManager } from '../client/http/RequestManager.ts';
 
-export default class Base {
+export class Base {
 	protected _client!: Client;
 	protected _request: RequestManager;
 

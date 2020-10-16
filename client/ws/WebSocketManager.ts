@@ -2,9 +2,9 @@ import { CLOSECODES, CONSTANTS, INTENDS, OPCODES } from '../../constants/discord
 import { Identify, Heartbeat } from '../../constants/payloads.ts';
 
 import type { GatewayPayload } from '../../interfaces/Payloads.ts';
-import type Client from '../Client.ts';
+import type { Client } from '../Client.ts';
 
-export default class WebSocketManager {
+export class WebSocketManager {
 	private _socket!: WebSocket;
 	private _interval: number = 0;
 	private _token!: string;
@@ -55,8 +55,8 @@ export default class WebSocketManager {
 		if (!eventName) return;
 
 		try {
-			const { default: eventHandler } = await import(`../../handlers/${eventName}.ts`);
-			eventHandler(this._client, payload);
+			const { handler } = await import(`../../handlers/${eventName}.ts`);
+			handler(this._client, payload);
 		} catch (error) {
 			console.log(error);
 		}

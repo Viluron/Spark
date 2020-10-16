@@ -1,11 +1,11 @@
-import type Client from '../client/Client.ts';
+import type { Client } from '../client/Client.ts';
 import type { ChannelPayload, PermissionOverwritesPayload } from '../interfaces/Payloads.ts';
-import Channel from './Channel.ts';
-import Collection from '../util/Collection.ts';
-import type Guild from './Guild.ts';
-import PermissionOverwrite from './PermissionOverwrite.ts';
+import { Channel } from './Channel.ts';
+import { Collection } from '../util/Collection.ts';
+import type { Guild } from './Guild.ts';
+import { PermissionOverwrite } from './PermissionOverwrite.ts';
 
-export default class GuildChannel extends Channel {
+export class GuildChannel extends Channel {
 	private _guild: Guild;
 	private _position: number;
 	private _permissionOverwrites: Collection<string, PermissionOverwrite> = new Collection([]);

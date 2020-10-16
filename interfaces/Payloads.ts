@@ -1,5 +1,5 @@
-import type Channel from '../classes/Channel.ts';
-import type User from '../classes/User.ts';
+import type { Channel } from '../classes/Channel.ts';
+import type { User } from '../classes/User.ts';
 import type { CHANNELTYPES, PERMISSION_OVERWRITE_TYPE } from '../constants/discord.ts';
 
 export interface GatewayPayload {
