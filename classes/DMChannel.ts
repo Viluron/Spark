@@ -1,6 +1,7 @@
 import Client from '../client/Client.ts';
-import { ChannelPayload } from '../interfaces/Payloads.ts';
+import { ChannelPayload, SendMessagePayload } from '../interfaces/Payloads.ts';
 import Channel from './Channel.ts';
+import Message from './Message.ts';
 import User from './User.ts';
 
 export default class DMChannel extends Channel {
@@ -26,5 +27,10 @@ export default class DMChannel extends Channel {
 
 	get recipient() {
 		return this._recipient;
+	}
+
+	public async sendMessage(content: string | SendMessagePayload): Promise<Message> {
+		const response = await this._request.sendMessage(this, content);
+		return new Message(this._client, response, this);
 	}
 }

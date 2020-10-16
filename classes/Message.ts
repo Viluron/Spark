@@ -1,10 +1,11 @@
 import Client from '../client/Client.ts';
 import RequestManager from '../client/http/RequestManager.ts';
-import { CLOSECODES } from '../constants/discord.ts';
+import { CHANNELTYPES, CLOSECODES } from '../constants/discord.ts';
 import { ChannelPayload, MessageCreatePayload } from '../interfaces/Payloads.ts';
 import ChannelFactory from '../util/ChannelFactory.ts';
 import Base from './Base.ts';
 import Channel from './Channel.ts';
+import DMChannel from './DMChannel.ts';
 import Guild from './Guild.ts';
 import GuildTextChannel from './GuildTextChannel.ts';
 import User from './User.ts';
@@ -12,7 +13,7 @@ import User from './User.ts';
 export default class Message extends Base {
 	private _id: string;
 	private _channelId: string;
-	private _channel!: Channel;
+	private _channel!: DMChannel | GuildTextChannel;
 	private _guildId?: string;
 	private _guild?: Guild;
 	private _author: User;
@@ -53,7 +54,14 @@ export default class Message extends Base {
 		this._type = p.type;
 		this._flags = p.flags;
 		this._mentionChannels = [];
-		this._channel = channel;
+
+		switch (channel.type) {
+			case CHANNELTYPES.DM:
+				this._channel = <DMChannel>channel;
+				break;
+			default:
+				this._channel = <GuildTextChannel>channel;
+		}
 
 		if (this._guildId) {
 			const guild = this.client.guilds.findById(this._guildId);
@@ -73,7 +81,63 @@ export default class Message extends Base {
 		}
 	}
 
+	get id() {
+		return this._id;
+	}
+
 	get channel() {
 		return this._channel;
+	}
+
+	get guild() {
+		return this._guild;
+	}
+
+	get author() {
+		return this._author;
+	}
+
+	get content() {
+		return this._content;
+	}
+
+	get timestamp() {
+		return this._timestamp;
+	}
+
+	get editedTimestamp() {
+		return this._editedTimestamp;
+	}
+
+	get tts() {
+		return this._tts;
+	}
+
+	get mentionEveryone() {
+		return this._mentionEveryone;
+	}
+
+	get mentionChannels() {
+		return this._mentionChannels;
+	}
+
+	get nonce() {
+		return this._nonce;
+	}
+
+	get pinned() {
+		return this._pinned;
+	}
+
+	get webhookId() {
+		return this._webhookId;
+	}
+
+	get type() {
+		return this._type;
+	}
+
+	get flags() {
+		return this._flags;
 	}
 }

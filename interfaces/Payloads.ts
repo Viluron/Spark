@@ -83,6 +83,16 @@ export interface MessageCreatePayload {
 	flags?: number;
 }
 
+export interface SendMessagePayload {
+	content: string;
+	nonce: number | string;
+	tts: boolean;
+	file: string;
+	embed: object; // TODO:
+	payload_json: string;
+	allowed_mentions: object; // TODO:
+}
+
 export interface ChannelPayload {
 	id: string;
 	type: CHANNELTYPES;

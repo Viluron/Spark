@@ -1,5 +1,5 @@
 import Client from '../client/Client.ts';
-import { ChannelPayload } from '../interfaces/Payloads.ts';
+import { ChannelPayload, SendMessagePayload } from '../interfaces/Payloads.ts';
 import type Guild from './Guild.ts';
 import GuildChannel from './GuildChannel.ts';
 
@@ -31,5 +31,9 @@ export default class GuildTextChannel extends GuildChannel {
 
 	public get lastPinTimestamp(): string | null {
 		return this._lastPinTimestamp || null;
+	}
+
+	public async sendMessage(content: string | SendMessagePayload) /*: Promise<Message>*/ {
+		await this._request.sendMessage(this, content);
 	}
 }
